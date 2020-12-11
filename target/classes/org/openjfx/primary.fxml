@@ -62,7 +62,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ListView prefHeight="450.0" prefWidth="325.0" />
+                  <ListView prefHeight="450.0" prefWidth="325.0" fx:id="playlists"/>
                   <AnchorPane prefHeight="57.0">
                      <children>
                         <Button layoutX="18.0" layoutY="9.0" mnemonicParsing="false" text="New..." textAlignment="CENTER" onAction="#newPlaylist">

@@ -1,13 +1,15 @@
 package org.openjfx;
 
-import java.io.IOException;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.FileChooser;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 
-public class PrimaryController {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PrimaryController  implements Initializable {
 
     @FXML
     private void switchToSecondary() throws IOException {
@@ -17,9 +19,23 @@ public class PrimaryController {
     @FXML
     private void newPlaylist() throws IOException {
         App.newPlaylistButton();
+        //App.playlist();
+
         //FileChooser fileChooser = new FileChooser();
         //fileChooser.showOpenDialog(Stage)
     }
+
+
+
+    //Main Actions
+
+        //Playlist Arraylist
+    @FXML public ListView playlists;
+
+
+
+
+
 
 
 
@@ -35,5 +51,14 @@ public class PrimaryController {
     @FXML
     private void newQuit() {
         App.quit();
+    }
+
+
+
+    //Initialization
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        playlists.getItems().addAll("D.A.D.","Shinedown","3 Doors Down");
+        //playlists.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 }

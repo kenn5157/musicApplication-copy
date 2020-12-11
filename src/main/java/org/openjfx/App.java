@@ -1,17 +1,22 @@
 package org.openjfx;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.stage.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import javafx.scene.layout.StackPane;
-import java.io.FileWriter;
+import javafx.scene.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -26,7 +31,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 1200, 700);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Music Application");
-        //primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -45,21 +50,31 @@ public class App extends Application {
 
 
 
-
+    //User creates new playlist
     public static void newPlaylistButton() throws IOException {
-        //StackPane secondaryLayout = new StackPane();
-        Scene secondScene = new Scene(loadFXML("secondary"), 600, 400);
-
-        // New window (Stage)
+        Scene scene = new Scene(loadFXML("UserInputBox"), 310, 50);
         Stage newWindow = new Stage();
-        newWindow.setTitle("New Playlist");
-        newWindow.setScene(secondScene);
-
-        // Specifies the modality for new window.
+        newWindow.setTitle("Create New Playlist");
+        newWindow.setScene(scene);
         newWindow.initModality(Modality.APPLICATION_MODAL);
-
         newWindow.show();
     }
+
+
+
+
+    //Main Actions
+
+        //Creates new playlist
+    public static void createPlaylist() throws IOException {
+        Scene newScene = new Scene(loadFXML("userInputBox"),150, 50);
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Name For New Playlist");
+        newWindow.setScene(newScene);
+        newWindow.show();
+    }
+
+
 
 
 
@@ -81,5 +96,22 @@ public class App extends Application {
     public static void quit() {
         System.out.println("Closing Program...");
         System.exit(0);
+    }
+
+    //Creates playlist
+    public static void playlist() {
+        ArrayList playlist = new ArrayList();
+
+        playlist.add("3 Doors Down");
+
+        for (int i = 0; i < playlist.size();i++) {
+            System.out.println(playlist.get(i));
+
+        }
+        playlist.addAll(Collections.singleton("Hi"));
+    }
+
+    public static void addToPlaylist() {
+
     }
 }

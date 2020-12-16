@@ -1,28 +1,24 @@
 package org.openjfx;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.stage.*;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
-import javafx.scene.layout.StackPane;
-import javafx.scene.*;
+import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.*;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 
 /**
  * JavaFX App
  */
 public class App extends Application {
+
+    private static final String filePath = "/Volumes/nasServer/IntelliJ Projects/playlist.txt";
+    public static ObservableList<String> playlist = FXCollections.observableArrayList();
+
 
     private static Scene scene;
 
@@ -44,20 +40,37 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         launch();
+        loadPlaylist();
+        //addToPlaylist("Some Music");
     }
 
 
+    //Loads playlist from file
+    public static void loadPlaylist() {
+        System.out.println("----------" + "\r\n" + "Loading Playlists..." + "\r\n");
+        try (FileReader fr = new FileReader(filePath); BufferedReader br = new BufferedReader(fr)) {
+            String line = br.readLine();
+            playlist.clear();
+            while(line!=null) {
+                System.out.println(line);
+                playlist.add(line);
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    //User creates new playlist
-    public static void newPlaylistButton() throws IOException {
-        Scene scene = new Scene(loadFXML("UserInputBox"), 310, 50);
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Create New Playlist");
-        newWindow.setScene(scene);
-        newWindow.initModality(Modality.APPLICATION_MODAL);
-        newWindow.show();
+    public static void addToPlaylist(String text){
+        System.out.println("Adding text to playlist..." + "\r\n");
+        try (FileWriter fw = new FileWriter(filePath, true);
+            BufferedWriter bw = new BufferedWriter(fw)) {
+            bw.append(text).append("\r\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -67,7 +80,7 @@ public class App extends Application {
 
         //Creates new playlist
     public static void createPlaylist() throws IOException {
-        Scene newScene = new Scene(loadFXML("userInputBox"),150, 50);
+        Scene newScene = new Scene(loadFXML("userInputBox"),310, 50);
         Stage newWindow = new Stage();
         newWindow.setTitle("Name For New Playlist");
         newWindow.setScene(newScene);
@@ -98,20 +111,4 @@ public class App extends Application {
         System.exit(0);
     }
 
-    //Creates playlist
-    public static void playlist() {
-        ArrayList playlist = new ArrayList();
-
-        playlist.add("3 Doors Down");
-
-        for (int i = 0; i < playlist.size();i++) {
-            System.out.println(playlist.get(i));
-
-        }
-        playlist.addAll(Collections.singleton("Hi"));
-    }
-
-    public static void addToPlaylist() {
-
-    }
 }

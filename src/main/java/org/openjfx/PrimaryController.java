@@ -1,44 +1,34 @@
 package org.openjfx;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PrimaryController  implements Initializable {
-
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
-
-    @FXML
-    private void newPlaylist() throws IOException {
-        App.newPlaylistButton();
-        //App.playlist();
-
-        //FileChooser fileChooser = new FileChooser();
-        //fileChooser.showOpenDialog(Stage)
-    }
-
+public class PrimaryController implements Initializable{
+    public ListView<String> playlists;
 
 
     //Main Actions
+    @FXML
+    private void newPlaylist() throws IOException {
+        App.createPlaylist();
+        //playlists.getSelectionModel().getSelectedItem().toString();
+    }
 
-        //Playlist Arraylist
-    @FXML public ListView playlists;
+    @FXML
+    private void deletePlaylist(){
 
+    }
 
-
-
-
-
-
-
+    @FXML
+    private void editPlaylist() {
+        playlists.setItems(App.playlist);
+    }
 
     //Menu Items
 
@@ -53,12 +43,15 @@ public class PrimaryController  implements Initializable {
         App.quit();
     }
 
+    @FXML
+    public void loadPlaylist(ActionEvent actionEvent){
+        App.loadPlaylist();
+    }
 
-
-    //Initialization
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        playlists.getItems().addAll("D.A.D.","Shinedown","3 Doors Down");
-        //playlists.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        playlists.setItems(App.playlist);
+        App.loadPlaylist();
+        //App.populatePlaylist();
     }
 }

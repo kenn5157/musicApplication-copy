@@ -19,7 +19,7 @@
             <Menu mnemonicParsing="false" text="File">
                <items>
                   <MenuItem mnemonicParsing="false" text="New" onAction="#newStart"/>
-                  <MenuItem mnemonicParsing="false" text="Open…" />
+                  <MenuItem mnemonicParsing="false" text="Load Playlists…" onAction="#loadPlaylist"/>
                   <Menu mnemonicParsing="false" text="Open Recent" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Close" />
@@ -70,12 +70,12 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="105.0" layoutY="10.0" mnemonicParsing="false" text="Edit...">
+                        <Button layoutX="105.0" layoutY="10.0" mnemonicParsing="false" text="Edit..." onAction="#editPlaylist">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="189.0" layoutY="9.0" mnemonicParsing="false" text="Delete">
+                        <Button layoutX="189.0" layoutY="9.0" mnemonicParsing="false" text="Delete" onAction="#deletePlaylist">
                            <font>
                               <Font size="18.0" />
                            </font>

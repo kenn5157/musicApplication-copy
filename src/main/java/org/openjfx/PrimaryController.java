@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,7 +45,8 @@ public class PrimaryController implements Initializable{
     }
 
     @FXML
-    public void loadPlaylist(ActionEvent actionEvent){
+    public void loadPlaylist(ActionEvent actionEvent) {
+        App.choosePlaylist();
         App.loadPlaylist();
     }
 
@@ -52,6 +54,5 @@ public class PrimaryController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playlists.setItems(App.playlist);
         App.loadPlaylist();
-        //App.populatePlaylist();
     }
 }

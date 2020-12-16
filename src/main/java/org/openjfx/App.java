@@ -6,9 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.*;
+import java.net.MalformedURLException;
 
 
 /**
@@ -16,7 +17,10 @@ import java.io.*;
  */
 public class App extends Application {
 
-    private static final String filePath = "/Volumes/nasServer/IntelliJ Projects/playlist.txt";
+    private static Stage primaryStage;
+
+    private static String filepathAsString;
+    private static String filePath = "/Volumes/nasServer/IntelliJ Projects/playlist.txt";
     public static ObservableList<String> playlist = FXCollections.observableArrayList();
 
 
@@ -24,11 +28,21 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        setPrimaryStage(primaryStage);
+        primaryStage = primaryStage;
+
         scene = new Scene(loadFXML("primary"), 1200, 700);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Music Application");
         primaryStage.setResizable(false);
         primaryStage.show();
+    }
+
+    public static Stage getPrimaryStage(){
+        return primaryStage;
+    }
+    private void setPrimaryStage(Stage primaryStage){
+        App.primaryStage = primaryStage;
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -77,6 +91,19 @@ public class App extends Application {
 
 
     //Main Actions
+
+        //File chooser for choosing the playlist file
+    public static void choosePlaylist() {
+        System.out.println("Choose Which Playlist File..." + "\r\n");
+        FileChooser fc = new FileChooser();
+        fc.setInitialFileName("Playlist.txt");
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File selectedFile = fc.showOpenDialog(primaryStage);
+        System.out.println(selectedFile);
+        filepathAsString = selectedFile.getAbsolutePath();
+        System.out.println(filepathAsString);
+        filePath = filepathAsString;
+    }
 
         //Creates new playlist
     public static void createPlaylist() throws IOException {
